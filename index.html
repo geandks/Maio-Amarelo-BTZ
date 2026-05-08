@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Maio Amarelo 2026 - BTZ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #f5c518 0%, #e6a800 100%);
+            padding: 30px 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 35px,
+                rgba(0,0,0,0.03) 35px,
+                rgba(0,0,0,0.03) 70px
+            );
+            animation: moveStripes 20s linear infinite;
+        }
+
+        @keyframes moveStripes {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(70px, 70px); }
+        }
+
+        .logo-container {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 15px;
+        }
+
+        .logo-container img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Placeholder caso a logo ainda não tenha sido inserida */
+        .logo-placeholder {
+            display: inline-block;
+            width: 150px;
+            height: 80px;
+            background: rgba(26,26,46,0.9);
+            border-radius: 10px;
+            line-height: 80px;
+            color: #f5c518;
+            font-weight: bold;
+            font-size: 2em;
+            letter-spacing: 3px;
+        }
+
+        header h1 {
+            font-size: 1.8em;
+            color: #1a1a2e;
+            position: relative;
+            z-index: 1;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        header p.tema {
+            font-size: 1em;
+            color: #333;
+            margin-top: 8px;
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+            padding: 0 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #1a1a2e;
+            color: #f5c518;
+            padding: 6px 16px;
+            border-radius: 30px;
+            margin-top: 12px;
+            font-weight: bold;
+            font-size: 0.8em;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* SEÇÕES */
+        section {
+            max-width: 100%;
+            padding: 40px 16px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #f5c518;
+            margin-bottom: 16px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #f5c518;
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
+
+        /* INTRODUÇÃO */
+        .intro-content {
+            background: rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 24px 18px;
+            border: 1px solid rgba(245,197,24,0.2);
+            line-height: 1.7;
+            font-size: 0.95em;
+        }
+
+        .intro-content p {
+            margin-bottom: 12px;
+        }
+
+        .stat-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(245,197,24,0.1), rgba(245,197,24,0.05));
+            border: 1px solid rgba(245,197,24,0.3);
+            border-radius: 12px;
+            padding: 18px 12px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:active {
+            transform: scale(0.95);
+        }
+
+        .stat-card .number {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #f5c518;
+        }
+
+        .stat-card .label {
+            font-size: 0.75em;
+            color: #ccc;
+            margin-top: 4px;
+        }
+
+        /* VÍDEO FIXO LOCAL */
+        .video-section {
+            padding: 40px 16px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            background: #000;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 14px;
+        }
+
+        .video-note {
+            text-align: center;
+            margin-top: 10px;
+            color: #888;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+
+        /* QUIZ */
+        .quiz-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 24px 18px;
+            border: 1px solid rgba(245,197,24,0.2);
+        }
+
+        .quiz-question {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .quiz-question.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quiz-question h3 {
+            font-size: 1.1em;
+            margin-bottom: 18px;
+            color: #f5c518;
+        }
+
+        .quiz-question p.question-text {
+            font-size: 1em;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95em;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .quiz-option:active {
+            transform: scale(0.97);
+        }
+
+        .quiz-option.correct {
+            border-color: #4caf50;
+            background: rgba(76,175,80,0.2);
+        }
+
+        .quiz-option.wrong {
+            border-color: #f44336;
+            background: rgba(244,67,54,0.2);
+        }
+
+        .quiz-option.disabled {
+            pointer-events: none;
+        }
+
+        .quiz-feedback {
+            margin-top: 16px;
+            padding: 14px;
+            border-radius: 10px;
+            display: none;
+            font-weight: 500;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(76,175,80,0.15);
+            border: 1px solid #4caf50;
+            color: #81c784;
+        }
+
+        .quiz-feedback.wrong {
+            background: rgba(244,67,54,0.15);
+            border: 1px solid #f44336;
+            color: #ef9a9a;
+        }
+
+        .quiz-progress {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transition: background 0.3s;
+        }
+
+        .progress-dot.active {
+            background: #f5c518;
+        }
+
+        .progress-dot.answered {
+            background: #4caf50;
+        }
+
+        .quiz-next-btn {
+            display: none;
+            margin-top: 16px;
+            padding: 12px 28px;
+            background: #f5c518;
+            color: #1a1a2e;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .quiz-next-btn:active {
+            transform: scale(0.97);
+        }
+
+        .quiz-result {
+            display: none;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .quiz-result h3 {
+            font-size: 1.5em;
+            color: #f5c518;
+            margin-bottom: 10px;
+        }
+
+        .quiz-score {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #f5c518;
+            margin: 15px 0;
+        }
+
+        /* SIMULAÇÃO */
+        .simulation-section {
+            text-align: center;
+        }
+
+        .simulation-description {
+            font-size: 0.95em;
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            padding: 0 5px;
+        }
+
+        .simulation-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            touch-action: none;
+        }
+
+        .road-canvas {
+            width: 100%;
+            height: 70vh;
+            max-height: 550px;
+            background: #333;
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+        }
+
+        .road {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 65%;
+            max-width: 250px;
+            height: 100%;
+            background: #444;
+            border-left: 3px solid #fff;
+            border-right: 3px solid #fff;
+        }
+
+        .road-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 50px;
+            background: #f5c518;
+            animation: roadMove 0.8s linear infinite;
+        }
+
+        .road-line:nth-child(1) { top: -50px; animation-delay: 0s; }
+        .road-line:nth-child(2) { top: 60px; animation-delay: 0.2s; }
+        .road-line:nth-child(3) { top: 170px; animation-delay: 0.4s; }
+        .road-line:nth-child(4) { top: 280px; animation-delay: 0.6s; }
+        .road-line:nth-child(5) { top: 390px; animation-delay: 0.8s; }
+
+        @keyframes roadMove {
+            0% { transform: translateX(-50%) translateY(0); }
+            100% { transform: translateX(-50%) translateY(110px); }
+        }
+
+        .road-paused .road-line {
+            animation-play-state: paused;
+        }
+
+        .player-car {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 80px;
+            background: linear-gradient(to bottom, #2196F3, #1565C0);
+            border-radius: 10px 10px 5px 5px;
+            transition: left 0.15s ease-out;
+            z-index: 5;
+        }
+
+        .player-car::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 5px;
+            right: 5px;
+            height: 20px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+        }
+
+        .obstacle-car {
+            position: absolute;
+            width: 44px;
+            height: 80px;
+            background: linear-gradient(to bottom, #f44336, #c62828);
+            border-radius: 10px 10px 5px 5px;
+            z-index: 4;
+        }
+
+        .obstacle-car::before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 5px;
+            right: 5px;
+            height: 20px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+        }
+
+        .phone-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(100%);
+            width: 200px;
+            height: 340px;
+            background: #111;
+            border-radius: 25px;
+            border: 3px solid #333;
+            padding: 35px 12px 45px;
+            z-index: 10;
+            transition: transform 0.5s ease;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+        }
+
+        .phone-overlay.show {
+            transform: translateX(-50%) translateY(15%);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 8px;
+            padding: 12px;
+            overflow: hidden;
+        }
+
+        .phone-notification {
+            background: #e3f2fd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-left: 3px solid #2196F3;
+        }
+
+        .phone-notification .app-name {
+            font-size: 0.65em;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .phone-notification .msg {
+            font-size: 0.75em;
+            color: #333;
+            margin-top: 3px;
+        }
+
+        .phone-input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 2px solid #ddd;
+            border-radius: 18px;
+            font-size: 0.75em;
+            margin-top: 8px;
+            outline: none;
+        }
+
+        .phone-input:focus {
+            border-color: #2196F3;
+        }
+
+        /* HUD */
+        .sim-hud {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 20;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .sim-hud-item {
+            background: rgba(0,0,0,0.75);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+
+        .sim-hud-item span {
+            color: #f5c518;
+        }
+
+        /* Controles */
+        .sim-controls {
+            padding: 20px 16px;
+            background: rgba(0,0,0,0.8);
+            text-align: center;
+        }
+
+        .sim-start-btn {
+            padding: 14px 35px;
+            background: #f5c518;
+            color: #1a1a2e;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .sim-start-btn:active {
+            transform: scale(0.97);
+        }
+
+        .sim-instruction {
+            color: #ccc;
+            margin-top: 10px;
+            font-size: 0.8em;
+            line-height: 1.4;
+        }
+
+        /* Touch zones visuais */
+        .touch-zones {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 8;
+            pointer-events: none;
+        }
+
+        .touch-zone-indicator {
+            background: rgba(245,197,24,0.15);
+            border: 1px dashed rgba(245,197,24,0.4);
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 1.5em;
+            pointer-events: none;
+        }
+
+        /* Crash overlay */
+        .crash-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(244,67,54,0.88);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 30;
+            padding: 20px;
+            animation: flashCrash 0.3s;
+        }
+
+        .crash-overlay.show {
+            display: flex;
+        }
+
+        @keyframes flashCrash {
+            0%, 50% { background: rgba(255,255,255,0.9); }
+            100% { background: rgba(244,67,54,0.88); }
+        }
+
+        .crash-overlay h2 {
+            font-size: 2em;
+            margin-bottom: 12px;
+        }
+
+        .crash-overlay p {
+            font-size: 0.95em;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .crash-overlay button {
+            margin-top: 20px;
+            padding: 12px 28px;
+            background: #fff;
+            color: #f44336;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        /* Blurred road */
+        .road-blurred .road,
+        .road-blurred .player-car,
+        .road-blurred .obstacle-car {
+            filter: blur(3px);
+            opacity: 0.6;
+        }
+
+        /* FOOTER */
+        footer {
+            background: rgba(0,0,0,0.3);
+            padding: 30px 16px;
+            text-align: center;
+            border-top: 2px solid rgba(245,197,24,0.3);
+        }
+
+        footer p {
+            color: #888;
+            font-size: 0.8em;
+            line-height: 1.5;
+        }
+
+        footer .hashtag {
+            color: #f5c518;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .credits {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.75em;
+            color: #666;
+        }
+
+        /* Scroll animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER COM LOGO BTZ -->
+    <header>
+        <div class="logo-container">
+            <!-- 
+                INSTRUÇÃO: Substitua o src abaixo pelo caminho da logo da BTZ.
+                Exemplo: src="logo-btz.png" ou src="images/logo-btz.png"
+            -->
+            <img src="logo-btz.png" alt="Logo BTZ" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+            <div class="logo-placeholder" style="display:none;">BTZ</div>
+        </div>
+        <h1>Maio Amarelo 2026</h1>
+        <p class="tema">"No trânsito, enxergar o outro é salvar vidas."</p>
+        <div class="badge">13ª Edição • Campanha Nacional</div>
+    </header>
+
+    <!-- INTRODUÇÃO -->
+    <section id="intro">
+        <h2 class="section-title fade-up">Sobre a Campanha</h2>
+        <div class="intro-content fade-up">
+            <p>O <strong>Maio Amarelo</strong> é um movimento internacional de conscientização para a redução de sinistros de trânsito. Em 2026, a 13ª edição traz o tema: <em>"No trânsito, enxergar o outro é salvar vidas"</em>.</p>
+            <p>O Brasil registra mais de <strong>37 mil mortes por ano</strong> no trânsito — mais de 100 vidas perdidas por dia. A distração ao volante, especialmente pelo uso do celular, é responsável por <strong>18% dos acidentes</strong> em todo o mundo.</p>
+            <p>Quase <strong>30 motoristas por hora</strong> são flagrados usando o celular enquanto dirigem no Brasil. Ao desviar o olhar por apenas 5 segundos a 60 km/h, você percorre o equivalente a um campo de futebol às cegas.</p>
+            <p><strong>Nenhuma mensagem vale uma vida.</strong> Assista ao vídeo, teste seus conhecimentos no quiz e viva a experiência da simulação abaixo.</p>
+
+            <div class="stat-cards">
+                <div class="stat-card">
+                    <div class="number">37 mil</div>
+                    <div class="label">Mortes/ano no trânsito</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">18%</div>
+                    <div class="label">Acidentes por distração</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">5s</div>
+                    <div class="label">= 83m sem olhar</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">30/h</div>
+                    <div class="label">Flagrados com celular</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VÍDEO LOCAL FIXO -->
+    <section id="video" class="video-section">
+        <h2 class="section-title fade-up">Assista e Reflita</h2>
+        <div class="video-container fade-up">
+            <!-- 
+                INSTRUÇÃO: Substitua o src abaixo pelo caminho do seu vídeo.
+                Exemplo: src="video-campanha.mp4"
+                
+                O atributo 'playsinline' garante que o vídeo toque inline no celular.
+                O atributo 'controls' mostra os controles de play/pause.
+                O atributo 'preload="metadata"' carrega só as infos iniciais.
+                O poster pode ser uma thumbnail: poster="thumb-video.jpg"
+            -->
+            <video 
+                src="video-campanha.mp4" 
+                controls 
+                playsinline 
+                preload="metadata"
+                poster="thumb-video.jpg"
+                controlslist="nodownload"
+                disablepictureinpicture
+            >
+                Seu navegador não suporta o elemento de vídeo.
+            </video>
+        </div>
+        <p class="video-note">* Coloque o arquivo de vídeo na mesma pasta do HTML com o nome "video-campanha.mp4"</p>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz">
+        <h2 class="section-title fade-up">Quiz: Teste Seus Conhecimentos</h2>
+        <div class="quiz-container fade-up">
+            <div class="quiz-progress" id="quizProgress">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+            </div>
+
+            <!-- Pergunta 1 -->
+            <div class="quiz-question active" data-correct="2">
+                <h3>Pergunta 1 de 5</h3>
+                <p class="question-text">Ao tirar os olhos da estrada por 5 segundos a 60 km/h, quantos metros o veículo percorre "às cegas"?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-index="0">A) Aproximadamente 30 metros</div>
+                    <div class="quiz-option" data-index="1">B) Aproximadamente 50 metros</div>
+                    <div class="quiz-option" data-index="2">C) Aproximadamente 83 metros</div>
+                    <div class="quiz-option" data-index="3">D) Aproximadamente 120 metros</div>
+                </div>
+                <div class="quiz-feedback"></div>
+                <button class="quiz-next-btn">Próxima →</button>
+            </div>
+
+            <!-- Pergunta 2 -->
+            <div class="quiz-question" data-correct="1">
+                <h3>Pergunta 2 de 5</h3>
+                <p class="question-text">Qual é o percentual de acidentes de carro no mundo causados por distração ao volante?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-index="0">A) 8%</div>
+                    <div class="quiz-option" data-index="1">B) 18%</div>
+                    <div class="quiz-option" data-index="2">C) 28%</div>
+                    <div class="quiz-option" data-index="3">D) 38%</div>
+                </div>
+                <div class="quiz-feedback"></div>
+                <button class="quiz-next-btn">Próxima →</button>
+            </div>
+
+            <!-- Pergunta 3 -->
+            <div class="quiz-question" data-correct="3">
+                <h3>Pergunta 3 de 5</h3>
+                <p class="question-text">Qual é a penalidade prevista no CTB para quem usa celular ao dirigir?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-index="0">A) Infração leve — 3 pontos</div>
+                    <div class="quiz-option" data-index="1">B) Infração média — 4 pontos</div>
+                    <div class="quiz-option" data-index="2">C) Infração grave — 5 pontos</div>
+                    <div class="quiz-option" data-index="3">D) Infração gravíssima — 7 pontos</div>
+                </div>
+                <div class="quiz-feedback"></div>
+                <button class="quiz-next-btn">Próxima →</button>
+            </div>
+
+            <!-- Pergunta 4 -->
+            <div class="quiz-question" data-correct="0">
+                <h3>Pergunta 4 de 5</h3>
+                <p class="question-text">Qual é o tema do Maio Amarelo 2026?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-index="0">A) "No trânsito, enxergar o outro é salvar vidas"</div>
+                    <div class="quiz-option" data-index="1">B) "Paz no trânsito começa por você"</div>
+                    <div class="quiz-option" data-index="2">C) "Juntos salvamos vidas"</div>
+                    <div class="quiz-option" data-index="3">D) "Seja você a mudança no trânsito"</div>
+                </div>
+                <div class="quiz-feedback"></div>
+                <button class="quiz-next-btn">Próxima →</button>
+            </div>
+
+            <!-- Pergunta 5 -->
+            <div class="quiz-question" data-correct="2">
+                <h3>Pergunta 5 de 5</h3>
+                <p class="question-text">Quase 8 em cada 10 vítimas graves do trânsito são:</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-index="0">A) Motoristas de automóveis</div>
+                    <div class="quiz-option" data-index="1">B) Passageiros de ônibus</div>
+                    <div class="quiz-option" data-index="2">C) Pedestres, ciclistas ou motociclistas</div>
+                    <div class="quiz-option" data-index="3">D) Motoristas de caminhão</div>
+                </div>
+                <div class="quiz-feedback"></div>
+                <button class="quiz-next-btn">Ver Resultado</button>
+            </div>
+
+            <!-- Resultado -->
+            <div class="quiz-result" id="quizResult">
+                <h3>Resultado do Quiz</h3>
+                <div class="quiz-score" id="quizScore">0/5</div>
+                <p id="quizMessage"></p>
+                <button class="sim-start-btn" onclick="resetQuiz()" style="margin-top:20px;">Refazer Quiz</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIMULAÇÃO -->
+    <section id="simulation" class="simulation-section">
+        <h2 class="section-title fade-up">Simulação: Celular ao Volante</h2>
+        <p class="simulation-description fade-up">
+            Sinta na prática como é perigoso mexer no celular enquanto dirige.<br>
+            <strong>Toque no lado esquerdo ou direito da pista</strong> para desviar dos obstáculos. 
+            Uma "notificação" aparecerá — tente responder e desviar ao mesmo tempo!
+        </p>
+
+        <div class="simulation-wrapper fade-up">
+            <div class="road-canvas" id="roadCanvas">
+                <div class="sim-hud">
+                    <div class="sim-hud-item">⏱ <span id="simTime">0s</span></div>
+                    <div class="sim-hud-item">🚗 <span id="simSpeed">60</span>km/h</div>
+                    <div class="sim-hud-item">✓ <span id="simDodges">0</span></div>
+                </div>
+
+                <div class="road" id="road">
+                    <div class="road-line"></div>
+                    <div class="road-line"></div>
+                    <div class="road-line"></div>
+                    <div class="road-line"></div>
+                    <div class="road-line"></div>
+                </div>
+
+                <div class="touch-zones">
+                    <div class="touch-zone-indicator">◀</div>
+                    <div class="touch-zone-indicator">▶</div>
+                </div>
+
+                <div class="player-car" id="playerCar"></div>
+
+                <div class="phone-overlay" id="phoneOverlay">
+                    <div class="phone-screen">
+                        <div class="phone-notification">
+                            <div class="app-name">📱 WhatsApp</div>
+                            <div class="msg" id="phoneMsg">Ei, onde vc tá? Chega que horas?</div>
+                        </div>
+                        <div class="phone-notification">
+                            <div class="app-name">📸 Instagram</div>
+                            <div class="msg">@amigo curtiu sua foto</div>
+                        </div>
+                        <input type="text" class="phone-input" id="phoneInput" placeholder="Digite sua resposta...">
+                        <p style="font-size:0.65em; color:#999; margin-top:8px; text-align:center;">
+                            ⚠️ Tente responder E desviar ao mesmo tempo!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="crash-overlay" id="crashOverlay">
+                    <h2>💥 COLISÃO!</h2>
+                    <p id="crashMessage">Você se distraiu e não conseguiu desviar a tempo. No trânsito real, isso poderia ser fatal.</p>
+                    <button onclick="resetSimulation()">Tentar Novamente</button>
+                </div>
+            </div>
+
+            <div class="sim-controls">
+                <button class="sim-start-btn" id="simStartBtn" onclick="startSimulation()">
+                    ▶ Iniciar Simulação
+                </button>
+                <p class="sim-instruction">Toque nos lados da tela para desviar. Responda a mensagem quando o celular aparecer!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p class="hashtag">#MaioAmarelo2026</p>
+        <p>"No trânsito, enxergar o outro é salvar vidas."<br>Compartilhe essa campanha!</p>
+        <div class="credits">
+            <p><strong>BTZ</strong> — Campanha Maio Amarelo 2026</p>
+            <p>Elaborado por <strong>Gean Carlos de Oliveira Souza</strong></p>
+            <p style="margin-top:8px;">© 2026 — Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // =============================================
+        // SCROLL ANIMATIONS
+        // =============================================
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // =============================================
+        // QUIZ
+        // =============================================
+        const questions = document.querySelectorAll('.quiz-question');
+        const progressDots = document.querySelectorAll('.progress-dot');
+        let currentQuestion = 0;
+        let score = 0;
+
+        const feedbackMessages = [
+            { correct: "Correto! A 60 km/h, em 5 segundos o veículo percorre cerca de 83 metros — quase um campo de futebol!", wrong: "Incorreto. A 60 km/h (16,6 m/s), em 5 segundos são percorridos aproximadamente 83 metros!" },
+            { correct: "Correto! 18% dos acidentes de carro no mundo são causados por distração.", wrong: "Incorreto. O percentual é 18%, segundo estudos internacionais." },
+            { correct: "Correto! Usar celular ao dirigir é infração gravíssima — 7 pontos e multa de R$293,47.", wrong: "Incorreto. É infração gravíssima — 7 pontos na CNH e multa de R$293,47." },
+            { correct: "Correto! O tema de 2026 é 'No trânsito, enxergar o outro é salvar vidas'.", wrong: "Incorreto. O tema oficial é 'No trânsito, enxergar o outro é salvar vidas'." },
+            { correct: "Correto! Pedestres, ciclistas e motociclistas são os mais vulneráveis.", wrong: "Incorreto. Quase 80% das vítimas graves são pedestres, ciclistas ou motociclistas." }
+        ];
+
+        document.querySelectorAll('.quiz-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const questionEl = this.closest('.quiz-question');
+                const correctIndex = parseInt(questionEl.dataset.correct);
+                const selectedIndex = parseInt(this.dataset.index);
+                const options = questionEl.querySelectorAll('.quiz-option');
+                const feedback = questionEl.querySelector('.quiz-feedback');
+                const nextBtn = questionEl.querySelector('.quiz-next-btn');
+
+                options.forEach(opt => opt.classList.add('disabled'));
+
+                if (selectedIndex === correctIndex) {
+                    this.classList.add('correct');
+                    feedback.textContent = feedbackMessages[currentQuestion].correct;
+                    feedback.className = 'quiz-feedback show correct';
+                    score++;
+                } else {
+                    this.classList.add('wrong');
+                    options[correctIndex].classList.add('correct');
+                    feedback.textContent = feedbackMessages[currentQuestion].wrong;
+                    feedback.className = 'quiz-feedback show wrong';
+                }
+
+                nextBtn.style.display = 'block';
+                progressDots[currentQuestion].classList.add('answered');
+            });
+        });
+
+        document.querySelectorAll('.quiz-next-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                questions[currentQuestion].classList.remove('active');
+                currentQuestion++;
+
+                if (currentQuestion < questions.length) {
+                    questions[currentQuestion].classList.add('active');
+                    progressDots[currentQuestion].classList.add('active');
+                } else {
+                    showResult();
+                }
+            });
+        });
+
+        function showResult() {
+            document.getElementById('quizResult').style.display = 'block';
+            document.getElementById('quizScore').textContent = score + '/5';
+            document.querySelector('.quiz-progress').style.display = 'none';
+
+            const messages = [
+                "Precisamos conversar... Reveja os conteúdos e se informe mais sobre segurança no trânsito!",
+                "Você tem algum conhecimento, mas pode aprender muito mais. Fique atento!",
+                "Bom resultado! Você demonstra consciência sobre segurança no trânsito.",
+                "Muito bem! Você está bem informado. Compartilhe esse conhecimento!",
+                "Excelente! Você é um verdadeiro embaixador da segurança no trânsito! 🏆"
+            ];
+
+            document.getElementById('quizMessage').textContent = messages[Math.min(score, 4)];
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('quizResult').style.display = 'none';
+            document.querySelector('.quiz-progress').style.display = 'flex';
+
+            questions.forEach((q) => {
+                q.classList.remove('active');
+                q.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.classList.remove('correct', 'wrong', 'disabled');
+                });
+                q.querySelector('.quiz-feedback').className = 'quiz-feedback';
+                q.querySelector('.quiz-next-btn').style.display = 'none';
+            });
+
+            progressDots.forEach(dot => {
+                dot.classList.remove('active', 'answered');
+            });
+
+            questions[0].classList.add('active');
+            progressDots[0].classList.add('active');
+        }
+
+        // =============================================
+        // SIMULAÇÃO - OTIMIZADA PARA TOQUE (MOBILE)
+        // =============================================
+        let simRunning = false;
+        let simInterval = null;
+        let obstacleInterval = null;
+        let phoneTimeout = null;
+        let simTime = 0;
+        let dodges = 0;
+        let playerPos = 50;
+        let obstacles = [];
+        let gameSpeed = 3;
+        let phoneShown = false;
+
+        const roadCanvas = document.getElementById('roadCanvas');
+        const playerCar = document.getElementById('playerCar');
+        const phoneOverlay = document.getElementById('phoneOverlay');
+        const crashOverlay = document.getElementById('crashOverlay');
+        const phoneInput = document.getElementById('phoneInput');
+
+        const notificationMessages = [
+            "Ei, onde vc tá? Chega que horas?",
+            "Manda a localização aí!",
+            "Olha esse meme kkkk",
+            "Reunião mudou pra 15h, confirma?",
+            "Ei responde!! Tá dirigindo?",
+            "Vc viu o que aconteceu hoje??",
+            "To te esperando, demora muito?",
+            "Manda foto do trânsito aí"
+        ];
+
+        function startSimulation() {
+            if (simRunning) return;
+            simRunning = true;
+            simTime = 0;
+            dodges = 0;
+            playerPos = 50;
+            obstacles = [];
+            phoneShown = false;
+            gameSpeed = 3;
+
+            document.getElementById('simStartBtn').textContent = 'Simulação em andamento...';
+            document.getElementById('simStartBtn').disabled = true;
+            crashOverlay.classList.remove('show');
+            phoneOverlay.classList.remove('show');
+            roadCanvas.classList.remove('road-blurred', 'road-paused');
+            playerCar.style.left = '50%';
+
+            document.querySelectorAll('.obstacle-car').forEach(el => el.remove());
+
+            simInterval = setInterval(gameLoop, 50);
+            obstacleInterval = setInterval(spawnObstacle, 1800);
+            phoneTimeout = setTimeout(showPhone, 4000 + Math.random() * 3000);
+
+            updateTime();
+        }
+
+        function updateTime() {
+            if (!simRunning) return;
+            simTime++;
+            document.getElementById('simTime').textContent = simTime + 's';
+            document.getElementById('simSpeed').textContent = Math.round(60 + simTime * 0.5);
+            setTimeout(updateTime, 1000);
+        }
+
+        function gameLoop() {
+            if (!simRunning) return;
+
+            obstacles.forEach((obs, index) => {
+                obs.top += gameSpeed;
+                obs.el.style.top = obs.top + 'px';
+
+                // Collision check
+                const canvasHeight = roadCanvas.offsetHeight;
+                if (obs.top > canvasHeight - 140 && obs.top < canvasHeight - 50) {
+                    const canvasWidth = roadCanvas.offsetWidth;
+                    const playerLeft = (playerPos / 100) * canvasWidth - 22;
+                    const playerRight = playerLeft + 44;
+                    const obsLeft = obs.left;
+                    const obsRight = obsLeft + 44;
+
+                    if (playerRight > obsLeft && playerLeft < obsRight) {
+                        crash();
+                        return;
+                    }
+                }
+
+                if (obs.top > roadCanvas.offsetHeight + 100) {
+                    obs.el.remove();
+                    obstacles.splice(index, 1);
+                    dodges++;
+                    document.getElementById('simDodges').textContent = dodges;
+                }
+            });
+
+            gameSpeed = 3 + simTime * 0.08;
+        }
+
+        function spawnObstacle() {
+            if (!simRunning) return;
+
+            const obstacle = document.createElement('div');
+            obstacle.className = 'obstacle-car';
+
+            const roadEl = document.getElementById('road');
+            const roadRect = roadEl.getBoundingClientRect();
+            const canvasRect = roadCanvas.getBoundingClientRect();
+
+            const roadLeft = roadRect.left - canvasRect.left;
+            const roadWidth = roadRect.width;
+
+            const randomX = roadLeft + 15 + Math.random() * (roadWidth - 74);
+
+            obstacle.style.left = randomX + 'px';
+            obstacle.style.top = '-90px';
+
+            roadCanvas.appendChild(obstacle);
+
+            obstacles.push({
+                el: obstacle,
+                top: -90,
+                left: randomX
+            });
+        }
+
+        function showPhone() {
+            if (!simRunning) return;
+            phoneShown = true;
+            phoneOverlay.classList.add('show');
+            roadCanvas.classList.add('road-blurred');
+
+            const msgEl = document.getElementById('phoneMsg');
+            msgEl.textContent = notificationMessages[Math.floor(Math.random() * notificationMessages.length)];
+
+            phoneInput.value = '';
+            setTimeout(() => { if(simRunning) phoneInput.focus(); }, 600);
+
+            setTimeout(() => {
+                if (simRunning && phoneShown) {
+                    hidePhone();
+                    phoneTimeout = setTimeout(showPhone, 4000 + Math.random() * 3000);
+                }
+            }, 6000);
+        }
+
+        function hidePhone() {
+            phoneShown = false;
+            phoneOverlay.classList.remove('show');
+            roadCanvas.classList.remove('road-blurred');
+        }
+
+        function crash() {
+            simRunning = false;
+            clearInterval(simInterval);
+            clearInterval(obstacleInterval);
+            clearTimeout(phoneTimeout);
+            roadCanvas.classList.add('road-paused');
+
+            const messages = [
+                `Você dirigiu por ${simTime}s antes de colidir. ${phoneShown ? 'O celular tirou sua atenção!' : 'Imagine com o celular na mão...'} Na vida real, não há "tentar novamente".`,
+                `Colisão após ${simTime}s. ${dodges} desvio(s) antes do impacto. A distração não perdoa.`,
+                `Apenas ${simTime}s e já houve acidente. No trânsito real, isso custa vidas.`
+            ];
+
+            document.getElementById('crashMessage').textContent = messages[Math.floor(Math.random() * messages.length)];
+            crashOverlay.classList.add('show');
+            phoneOverlay.classList.remove('show');
+
+            document.getElementById('simStartBtn').textContent = '▶ Iniciar Simulação';
+            document.getElementById('simStartBtn').disabled = false;
+        }
+
+        function resetSimulation() {
+            crashOverlay.classList.remove('show');
+            document.getElementById('simStartBtn').textContent = '▶ Iniciar Simulação';
+            document.getElementById('simStartBtn').disabled = false;
+            document.querySelectorAll('.obstacle-car').forEach(el => el.remove());
+            obstacles = [];
+            roadCanvas.classList.remove('road-paused', 'road-blurred');
+        }
+
+        // CONTROLES DE TOQUE (MOBILE)
+        let touchMoveHandler = null;
+
+        roadCanvas.addEventListener('touchstart', function(e) {
+            if (!simRunning) return;
+            if (e.target === phoneInput || e.target.closest('.phone-screen')) return;
+            e.preventDefault();
+
+            const touch = e.touches[0];
+            const rect = roadCanvas.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+
+            if (x < rect.width / 2) {
+                playerPos = Math.max(15, playerPos - 10);
+            } else {
+                playerPos = Math.min(85, playerPos + 10);
+            }
+            playerCar.style.left = playerPos + '%';
+        }, { passive: false });
+
+        roadCanvas.addEventListener('touchmove', function(e) {
+            if (!simRunning) return;
+            if (e.target === phoneInput || e.target.closest('.phone-screen')) return;
+            e.preventDefault();
+
+            const touch = e.touches[0];
+            const rect = roadCanvas.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const percentage = (x / rect.width) * 100;
+            playerPos = Math.max(15, Math.min(85, percentage));
+            playerCar.style.left = playerPos + '%';
+        }, { passive: false });
+
+        // CONTROLES DE TECLADO (DESKTOP fallback)
+        document.addEventListener('keydown', function(e) {
+            if (!simRunning) return;
+            if (e.key === 'ArrowLeft') {
+                playerPos = Math.max(15, playerPos - 6);
+            } else if (e.key === 'ArrowRight') {
+                playerPos = Math.min(85, playerPos + 6);
+            }
+            playerCar.style.left = playerPos + '%';
+        });
+
+        // Impedir que input do telefone interfira na navegação
+        phoneInput.addEventListener('keydown', function(e) {
+            e.stopPropagation();
+        });
+    </script>
+
+</body>
+</html>
