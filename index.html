@@ -62,7 +62,6 @@
             border-radius: 10px;
         }
 
-        /* Placeholder caso a logo ainda não tenha sido inserida */
         .logo-placeholder {
             display: inline-block;
             width: 150px;
@@ -177,7 +176,7 @@
             margin-top: 4px;
         }
 
-        /* VÍDEO FIXO LOCAL */
+        /* VÍDEO GOOGLE DRIVE */
         .video-section {
             padding: 40px 16px;
         }
@@ -185,25 +184,22 @@
         .video-container {
             position: relative;
             width: 100%;
-            border-radius: 14px;
+            padding-bottom: 56.25%;
+            height: 0;
             overflow: hidden;
+            border-radius: 14px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
             background: #000;
         }
 
-        .video-container video {
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            display: block;
+            height: 100%;
+            border: none;
             border-radius: 14px;
-        }
-
-        .video-note {
-            text-align: center;
-            margin-top: 10px;
-            color: #888;
-            font-size: 0.8em;
-            font-style: italic;
         }
 
         /* QUIZ */
@@ -721,10 +717,6 @@
     <!-- HEADER COM LOGO BTZ -->
     <header>
         <div class="logo-container">
-            <!-- 
-                INSTRUÇÃO: Substitua o src abaixo pelo caminho da logo da BTZ.
-                Exemplo: src="logo-btz.png" ou src="images/logo-btz.png"
-            -->
             <img src="logo-btz.png" alt="Logo BTZ" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
             <div class="logo-placeholder" style="display:none;">BTZ</div>
         </div>
@@ -763,32 +755,16 @@
         </div>
     </section>
 
-    <!-- VÍDEO LOCAL FIXO -->
+    <!-- VÍDEO VIA GOOGLE DRIVE -->
     <section id="video" class="video-section">
         <h2 class="section-title fade-up">Assista e Reflita</h2>
         <div class="video-container fade-up">
-            <!-- 
-                INSTRUÇÃO: Substitua o src abaixo pelo caminho do seu vídeo.
-                Exemplo: src="video-campanha.mp4"
-                
-                O atributo 'playsinline' garante que o vídeo toque inline no celular.
-                O atributo 'controls' mostra os controles de play/pause.
-                O atributo 'preload="metadata"' carrega só as infos iniciais.
-                O poster pode ser uma thumbnail: poster="thumb-video.jpg"
-            -->
-            <video 
-                src="video-campanha.mp4" 
-                controls 
-                playsinline 
-                preload="metadata"
-                poster="thumb-video.jpg"
-                controlslist="nodownload"
-                disablepictureinpicture
-            >
-                Seu navegador não suporta o elemento de vídeo.
-            </video>
+            <iframe 
+                src="https://drive.google.com/file/d/11jdoFXxIrkmKdhOVSCM4a_Bwg9JeMH2m/preview" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen>
+            </iframe>
         </div>
-        <p class="video-note">* Coloque o arquivo de vídeo na mesma pasta do HTML com o nome "video-campanha.mp4"</p>
     </section>
 
     <!-- QUIZ -->
@@ -1144,7 +1120,6 @@
                 obs.top += gameSpeed;
                 obs.el.style.top = obs.top + 'px';
 
-                // Collision check
                 const canvasHeight = roadCanvas.offsetHeight;
                 if (obs.top > canvasHeight - 140 && obs.top < canvasHeight - 50) {
                     const canvasWidth = roadCanvas.offsetWidth;
@@ -1254,8 +1229,6 @@
         }
 
         // CONTROLES DE TOQUE (MOBILE)
-        let touchMoveHandler = null;
-
         roadCanvas.addEventListener('touchstart', function(e) {
             if (!simRunning) return;
             if (e.target === phoneInput || e.target.closest('.phone-screen')) return;
@@ -1297,7 +1270,6 @@
             playerCar.style.left = playerPos + '%';
         });
 
-        // Impedir que input do telefone interfira na navegação
         phoneInput.addEventListener('keydown', function(e) {
             e.stopPropagation();
         });
